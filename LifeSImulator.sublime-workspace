@@ -1,0 +1,265 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/D/AI/LifeSimulator/.gitignore",
+		"/D/AI/search-files/src/core/database.py",
+		"/D/AI/search-files/src/core/paths.py",
+		"/D/AI/search-files/src/core/indexer.py",
+		"/D/AI/search-files/src/core/query.py",
+		"/D/AI/search-files/src/core/search.py",
+		"/D/AI/search-files/.env",
+		"/D/AI/search-files/src/llm/parser.py",
+		"/D/AI/search-files/src/assistant.py",
+		"/D/AI/search-files/src/api/app.py",
+		"/D/AI/search-files/main.py",
+		"/D/AI/search-files/README.md",
+		"/C/Users/bruno/Downloads/README_search-files_V2.md",
+		"/D/AI/search-files/.gitignore",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/config/paths.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/core/data_manager.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/tools/system_reset_tools.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/core/router.py",
+		"/D/AI/max_assistant_v2/data/profile.json",
+		"/D/AI/max_assistant_v2/data/long_term.jsonl",
+		"/D/AI/max_assistant_v2/data/vector_store/meta.jsonl",
+		"/D/AI/max_assistant_v2/data/agenda.json",
+		"/D/AI/max_assistant_v2/data/apps.json",
+		"/D/AI/max_assistant_v2/data/projects.json",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/memory/profile.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/core/project_manager.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/tools/reset_tools.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/tools/webcam_tools.py",
+		"/D/AI/max_assistant_v2/.gitignore",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/web/static/manifest.json",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/web/static/service-worker.js",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/web/static/index.html",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/core/orchestrator.py",
+		"/C/Users/bruno/Downloads/README_FRANK_GENERATED.md",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/web/server.py",
+		"/D/AI/max_assistant_v2/README.md",
+		"/D/README.md",
+		"/C/Users/bruno/Downloads/README_FRANK_GENERATED_v2.md",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/stt/whisper_engine.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/tools/camera_tools.py",
+		"/D/AI/max_assistant_v2/scripts/run.py",
+		"/D/AI/max_assistant_v2/web/server.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/tools/image_tools.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/core/assistant.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/tts/piper_engine.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/ui/memory_dashboard.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/tools/web_tools.py",
+		"/D/AI/max_assistant_v2/start_franck.bat",
+		"/D/AI/max_assistant_v2/data/.env",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/config/identity.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/tools/system_tools.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/agents/planner_agent.py",
+		"/D/AI/max_assistant_v2/pyproject.toml",
+		"/D/AI/CHANGELOG_FRANK_v0.2.0.md",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/core/agenda_manager.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/core/agenda_reminder.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/core/main_logic.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/tools/tool_registry.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/pyproject.toml",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/core/behavior_analyzer.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/tools/memory_dashboard_tool.py",
+		"/D/AI/README_ULTRA.md",
+		"/D/AI/README_PREMIUM.md",
+		"/D/AI/ROADMAP_v1_0_3_6_MOIS.md",
+		"/D/AI/pyproject.toml",
+		"/D/AI/ROADMAP.md",
+		"/D/AI/CONTRIBUTING.md",
+		"/D/AI/README.md",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/ui/hud.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/core/interrupt_manager.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/core/audio_controller.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/core/state_manager.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/ui/console_hud.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/config/settings.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/tools/web_search.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/memory/memory_writer.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/llm/lmstudio_client.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/memory/vector_store.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/memory/profile.json",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/memory/embeddings.py",
+		"/D/AI/max_assistant_v2/src/scripts/run_assistant.py",
+		"/C/Users/bruno/Desktop/py/stt.py",
+		"/D/Projets/AI/MAX/max.py",
+		"/D/AI/max_assistant_v2/scripts/__init__.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/agents/executor_agent.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/utils/logger.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/memory/short_term.py",
+		"/D/AI/max_assistant_v2/src/max_assistant_v2/memory/long_term.py",
+		"/D/AI/max_assistant_v2/requirements.txt",
+		"/D/Projets/AI/MAX/aide",
+		"/D/Projets/AI/MAX/README.md",
+		"/D/Projets/AI/MAX/.gitignore",
+		"/D/jarvis_local/max.py",
+		"/D/jarvis_local/jarvis.py",
+		"/D/jarvis_local/jarvis_assistant.py",
+		"/D/AI/MAX/run_max.bat"
+	],
+	"find":
+	{
+		"height": 28.0
+	},
+	"find_in_files":
+	{
+		"height": 107.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 28.0
+	},
+	"input":
+	{
+		"height": 41.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"pinned_build_system": "",
+	"project": "LifeSImulator.sublime-project",
+	"replace":
+	{
+		"height": 52.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 204.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
