@@ -73,22 +73,12 @@ class Agent:
         self.pos = world.clamp((x + step[0], y + step[1]))
 
     def act(self, world: World) -> None:
-
-        # cooldown mouvement
-        self.move_timer += 1 / config.TICKS_PER_SECOND
-
-        if self.move_timer < config.AGENT_MOVE_COOLDOWN:
-            return
-
-        self.move_timer = 0
-
-
         if not self.alive:
             return
 
         goal = self.choose_goal()
 
-        # Consommer si on est sur la case
+        # ✅ Actions "instantanées" (ne doivent PAS être bloquées par le cooldown)
         if goal == "food" and world.take_resource_at("food", self.pos):
             self.hunger = max(0.0, self.hunger - config.EAT_AMOUNT)
             self.energy = min(config.MAX_NEED, self.energy + 5.0)
@@ -101,12 +91,17 @@ class Agent:
 
         if goal == "sleep":
             self.energy = min(config.MAX_NEED, self.energy + config.SLEEP_AMOUNT)
-            # dormir consomme un peu
             self.hunger = min(config.MAX_NEED, self.hunger + 0.5)
             self.thirst = min(config.MAX_NEED, self.thirst + 0.8)
             return
 
-        # Aller vers ressource si vue
+        # ⏳ Cooldown UNIQUEMENT pour le mouvement
+        self.move_timer += 1 / config.TICKS_PER_SECOND
+        if self.move_timer < config.AGENT_MOVE_COOLDOWN:
+            return
+        self.move_timer = 0.0
+
+        # 🚶 Déplacement
         if goal in ("food", "water"):
             res = world.nearest_resource(goal, self.pos, config.VISION_RANGE)
             if res:
