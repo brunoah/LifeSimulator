@@ -9,12 +9,33 @@ import config
 from world import World, Pos
 
 
+def generate_name() -> str:
+    # style "Creatures": 5 à 6 lettres, prononçable-ish
+    consonants = "bcdfghjklmnpqrstvwxz"
+    vowels = "aeiouy"
+    length = random.choice([5, 6])
+
+    # on alterne consonne/voyelle
+    s = []
+    start_with_consonant = random.random() < 0.7
+    for i in range(length):
+        if (i % 2 == 0) == start_with_consonant:
+            s.append(random.choice(consonants))
+        else:
+            s.append(random.choice(vowels))
+
+    name = "".join(s)
+    return name.capitalize()
+
 @dataclass
 class Agent:
     id: int
     pos: Pos
-    facing: Pos = (1, 0)
 
+    name: str
+    speed: float  # 0.7 = lent, 1.0 = normal, 1.4 = rapide
+
+    facing: Pos = (1, 0)
     move_timer: float = 0.0
 
     age: int = 0
@@ -97,8 +118,13 @@ class Agent:
 
         # ⏳ Cooldown UNIQUEMENT pour le mouvement
         self.move_timer += 1 / config.TICKS_PER_SECOND
-        if self.move_timer < config.AGENT_MOVE_COOLDOWN:
+
+        # cooldown individuel: plus speed est grand, plus il bouge souvent
+        personal_cooldown = max(0.05, config.AGENT_MOVE_COOLDOWN / max(0.1, self.speed))
+
+        if self.move_timer < personal_cooldown:
             return
+
         self.move_timer = 0.0
 
         # 🚶 Déplacement

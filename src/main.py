@@ -6,7 +6,7 @@ import pygame
 
 import config
 from world import World
-from agent import Agent
+from agent import Agent, generate_name
 
 
 def cell_to_px(pos):
@@ -21,7 +21,7 @@ def draw_need_bar(screen, x, y, w, h, value):
     pygame.draw.rect(screen, (30, 30, 30), (x, y, w, h), 1)
     pygame.draw.rect(screen, (200, 200, 200), (x, y, fill, h))
 
-def draw_agent_with_direction(screen, pos, facing, color):
+def draw_agent_with_direction(screen, font, pos, facing, color, name: str):
     px, py = cell_to_px(pos)
     cx = px + config.CELL_SIZE // 2
     cy = py + config.CELL_SIZE // 2
@@ -32,27 +32,27 @@ def draw_agent_with_direction(screen, pos, facing, color):
 
     # Direction (triangle)
     fx, fy = facing
-    # Sécurise au cas où
     if (fx, fy) == (0, 0):
         fx, fy = (1, 0)
 
-    # Normalise grossièrement (optionnel) : on garde juste le signe
     fx = 0 if fx == 0 else (1 if fx > 0 else -1)
     fy = 0 if fy == 0 else (1 if fy > 0 else -1)
 
-    # Pointe du triangle (devant)
     tip_dist = radius + 4
     tip = (cx + fx * tip_dist, cy + fy * tip_dist)
 
-    # Base du triangle (perpendiculaire)
     base_width = 6
-    # vecteur perpendiculaire (fx,fy) -> (-fy, fx)
     pxv, pyv = (-fy, fx)
 
     base1 = (cx + pxv * base_width, cy + pyv * base_width)
     base2 = (cx - pxv * base_width, cy - pyv * base_width)
 
     pygame.draw.polygon(screen, color, [tip, base1, base2])
+
+    # Nom (au-dessus)
+    label = font.render(name, True, (235, 235, 235))
+    label_rect = label.get_rect(center=(cx, py - 8))
+    screen.blit(label, label_rect)
 
 def draw_legend(screen, font):
 
@@ -90,10 +90,25 @@ def main():
 
     world = World(config.GRID_W, config.GRID_H)
 
+    from agent import Agent, generate_name  # <= ajoute generate_name à l'import (voir note dessous)
+
     agents: list[Agent] = []
     for i in range(config.START_AGENTS):
         pos = (random.randrange(world.w), random.randrange(world.h))
-        agents.append(Agent(id=i + 1, pos=pos))
+
+        name = generate_name()
+
+        # vitesse individuelle (distribution simple)
+        # ~70% normal, ~15% lent, ~15% rapide
+        r = random.random()
+        if r < 0.15:
+            speed = random.uniform(0.6, 0.85)   # lent
+        elif r < 0.85:
+            speed = random.uniform(0.9, 1.1)    # normal
+        else:
+            speed = random.uniform(1.2, 1.6)    # rapide
+
+        agents.append(Agent(id=i + 1, pos=pos, name=name, speed=speed))
 
     # ressources initiales
     for _ in range(25):
@@ -157,7 +172,7 @@ def main():
             if a.id == selected_id:
                 color = (255, 120, 120)
 
-            draw_agent_with_direction(screen, a.pos, a.facing, color)
+            draw_agent_with_direction(screen, font, a.pos, a.facing, color, a.name)
 
         # HUD agent sélectionné
         sel = next((a for a in agents if a.id == selected_id), None)
@@ -166,7 +181,11 @@ def main():
         pygame.draw.rect(screen, (60, 60, 70), (hud_x, hud_y, 330, 120), 1)
 
         if sel:
-            t1 = font.render(f"Sélectionné: A{sel.id}  Espérance={sel.alive}  Age={sel.age}", True, (230, 230, 230))
+            t1 = font.render(
+                f"Sélectionné: {sel.name} (A{sel.id})  Vitesse={sel.speed:.2f}  Vivant={sel.alive}  Age={sel.age}",
+                True,
+                (230, 230, 230)
+            )
             screen.blit(t1, (hud_x + 10, hud_y + 10))
 
             screen.blit(font.render("Faim", True, (230, 230, 230)), (hud_x + 10, hud_y + 35))
