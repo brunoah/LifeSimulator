@@ -21,6 +21,32 @@ def draw_need_bar(screen, x, y, w, h, value):
     pygame.draw.rect(screen, (30, 30, 30), (x, y, w, h), 1)
     pygame.draw.rect(screen, (200, 200, 200), (x, y, fill, h))
 
+def draw_legend(screen, font):
+
+    legend_x = config.WINDOW_W - 180
+    legend_y = 10
+
+    pygame.draw.rect(screen, (10,10,12), (legend_x, legend_y, 170, 120))
+    pygame.draw.rect(screen, (60,60,70), (legend_x, legend_y, 170, 120), 1)
+
+    title = font.render("Légende", True, (230,230,230))
+    screen.blit(title, (legend_x + 10, legend_y + 8))
+
+    items = [
+        ((240,200,80), "Agent"),
+        ((255,120,120), "Agent Sélectionné"),
+        ((80,220,120), "Nourriture"),
+        ((80,140,240), "Eau")
+    ]
+
+    for i, (color, text) in enumerate(items):
+
+        y = legend_y + 30 + i * 20
+
+        pygame.draw.rect(screen, color, (legend_x + 10, y, 12, 12))
+
+        label = font.render(text, True, (230,230,230))
+        screen.blit(label, (legend_x + 30, y - 2))
 
 def main():
     pygame.init()
@@ -124,6 +150,8 @@ def main():
 
             alive_count = sum(1 for a in agents if a.alive)
             screen.blit(font.render(f"Alive agents: {alive_count}", True, (230, 230, 230)), (hud_x + 10, hud_y + 95))
+
+        draw_legend(screen, font)    
 
         pygame.display.flip()
 
