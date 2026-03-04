@@ -13,6 +13,9 @@ from world import World, Pos
 class Agent:
     id: int
     pos: Pos
+    facing: Pos = (1, 0)
+
+    move_timer: float = 0.0
 
     age: int = 0
     alive: bool = True
@@ -49,17 +52,37 @@ class Agent:
 
         # hasard léger pour éviter un “rail”
         if random.random() < 0.5:
-            new_pos = (x + dx, y) if dx != 0 else (x, y + dy)
+            step = (dx, 0) if dx != 0 else (0, dy)
         else:
-            new_pos = (x, y + dy) if dy != 0 else (x + dx, y)
+            step = (0, dy) if dy != 0 else (dx, 0)
 
+        # si pas de mouvement possible (déjà sur place), on ne change pas facing
+        if step != (0, 0):
+            self.facing = step
+
+        new_pos = (x + step[0], y + step[1])
         self.pos = world.clamp(new_pos)
 
     def _wander(self, world: World) -> None:
+        step = (random.choice([-1, 0, 1]), random.choice([-1, 0, 1]))
+        if step == (0, 0):
+            return
+
+        self.facing = step
         x, y = self.pos
-        self.pos = world.clamp((x + random.choice([-1, 0, 1]), y + random.choice([-1, 0, 1])))
+        self.pos = world.clamp((x + step[0], y + step[1]))
 
     def act(self, world: World) -> None:
+
+        # cooldown mouvement
+        self.move_timer += 1 / config.TICKS_PER_SECOND
+
+        if self.move_timer < config.AGENT_MOVE_COOLDOWN:
+            return
+
+        self.move_timer = 0
+
+
         if not self.alive:
             return
 

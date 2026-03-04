@@ -21,6 +21,39 @@ def draw_need_bar(screen, x, y, w, h, value):
     pygame.draw.rect(screen, (30, 30, 30), (x, y, w, h), 1)
     pygame.draw.rect(screen, (200, 200, 200), (x, y, fill, h))
 
+def draw_agent_with_direction(screen, pos, facing, color):
+    px, py = cell_to_px(pos)
+    cx = px + config.CELL_SIZE // 2
+    cy = py + config.CELL_SIZE // 2
+
+    # Corps
+    radius = config.CELL_SIZE // 2 - 2
+    pygame.draw.circle(screen, color, (cx, cy), radius)
+
+    # Direction (triangle)
+    fx, fy = facing
+    # Sécurise au cas où
+    if (fx, fy) == (0, 0):
+        fx, fy = (1, 0)
+
+    # Normalise grossièrement (optionnel) : on garde juste le signe
+    fx = 0 if fx == 0 else (1 if fx > 0 else -1)
+    fy = 0 if fy == 0 else (1 if fy > 0 else -1)
+
+    # Pointe du triangle (devant)
+    tip_dist = radius + 4
+    tip = (cx + fx * tip_dist, cy + fy * tip_dist)
+
+    # Base du triangle (perpendiculaire)
+    base_width = 6
+    # vecteur perpendiculaire (fx,fy) -> (-fy, fx)
+    pxv, pyv = (-fy, fx)
+
+    base1 = (cx + pxv * base_width, cy + pyv * base_width)
+    base2 = (cx - pxv * base_width, cy - pyv * base_width)
+
+    pygame.draw.polygon(screen, color, [tip, base1, base2])
+
 def draw_legend(screen, font):
 
     legend_x = config.WINDOW_W - 180
@@ -115,19 +148,16 @@ def main():
             px, py = cell_to_px(w.pos)
             pygame.draw.rect(screen, (80, 140, 240), (px, py, config.CELL_SIZE, config.CELL_SIZE))
 
-        # agents: cercles
+        # agents: cercles + direction
         for a in agents:
             if not a.alive:
                 continue
-            px, py = cell_to_px(a.pos)
-            cx = px + config.CELL_SIZE // 2
-            cy = py + config.CELL_SIZE // 2
 
             color = (240, 200, 80)
             if a.id == selected_id:
                 color = (255, 120, 120)
 
-            pygame.draw.circle(screen, color, (cx, cy), config.CELL_SIZE // 2 - 2)
+            draw_agent_with_direction(screen, a.pos, a.facing, color)
 
         # HUD agent sélectionné
         sel = next((a for a in agents if a.id == selected_id), None)
@@ -136,20 +166,20 @@ def main():
         pygame.draw.rect(screen, (60, 60, 70), (hud_x, hud_y, 330, 120), 1)
 
         if sel:
-            t1 = font.render(f"Selected: A{sel.id}  Alive={sel.alive}  Age={sel.age}", True, (230, 230, 230))
+            t1 = font.render(f"Sélectionné: A{sel.id}  Espérance={sel.alive}  Age={sel.age}", True, (230, 230, 230))
             screen.blit(t1, (hud_x + 10, hud_y + 10))
 
-            screen.blit(font.render("Hunger", True, (230, 230, 230)), (hud_x + 10, hud_y + 35))
+            screen.blit(font.render("Faim", True, (230, 230, 230)), (hud_x + 10, hud_y + 35))
             draw_need_bar(screen, hud_x + 80, hud_y + 38, 230, 10, sel.hunger)
 
-            screen.blit(font.render("Thirst", True, (230, 230, 230)), (hud_x + 10, hud_y + 55))
+            screen.blit(font.render("Soif", True, (230, 230, 230)), (hud_x + 10, hud_y + 55))
             draw_need_bar(screen, hud_x + 80, hud_y + 58, 230, 10, sel.thirst)
 
-            screen.blit(font.render("Energy", True, (230, 230, 230)), (hud_x + 10, hud_y + 75))
+            screen.blit(font.render("Energie", True, (230, 230, 230)), (hud_x + 10, hud_y + 75))
             draw_need_bar(screen, hud_x + 80, hud_y + 78, 230, 10, sel.energy)
 
             alive_count = sum(1 for a in agents if a.alive)
-            screen.blit(font.render(f"Alive agents: {alive_count}", True, (230, 230, 230)), (hud_x + 10, hud_y + 95))
+            screen.blit(font.render(f"Agents vivants: {alive_count}", True, (230, 230, 230)), (hud_x + 10, hud_y + 95))
 
         draw_legend(screen, font)    
 

@@ -36,3 +36,6 @@ MAX_WATER = 50
 
 # “Vision” simple: distance Manhattan max pour détecter une ressource
 VISION_RANGE = 12
+
+# vitesse des agents
+AGENT_MOVE_COOLDOWN = 0.6   # secondes entre deux mouvements
